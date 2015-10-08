@@ -1,0 +1,90 @@
+<div class="row">
+  <h1>Cart</h1>
+  <div class="col-sm-12">
+    {{#if cart.order.lineItems.length}}
+      <table>
+        <thead>
+          <tr>
+            <th class="text-center" colspan="2">Item</th>
+            <th class="text-center" width="100">Price</th>
+            <th class="text-center" width="100">Quantity</th>
+            <th class="text-center" width="100">Total</th>
+            <th class="text-center" width="100"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each cart.order.lineItems as |lineItem| }}
+            <tr>
+              <td width="120"><img {{bind-attr src=lineItem.variant.images.firstObject.smallUrl}}></td>
+              <td>
+                <h5>{{lineItem.variant.name}}</h5>
+                <p>{{lineItem.variant.optionsText}}</p>
+                {{lineItem.variant.description}}
+              </td>
+              <td class="text-center">{{lineItem.singleDisplayAmount}}</td>
+              <td class="text-center">{{lineItem.quantity}}</td>
+              <td class="text-center">{{lineItem.displayAmount}}</td>
+              <td class="text-center">
+                <a {{action 'deleteLineItem' lineItem}}>Remove</a>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      <form>
+        <fieldset>
+          <legend>Order Details</legend>
+          <div class="row">
+            <div class="col-sm-6">
+              <h6>Item Total:</h6>
+            </div>
+            <div class="col-sm-6 text-right">
+              <h6>{{cart.order.itemTotal}}</h6>
+            </div>
+          </div>
+
+          {{#if cart.order.shipmentTotal}}
+            <div class="row">
+              <div class="col-sm-6">
+                <h6>Shipping:</h6>
+              </div>
+              <div class="col-sm-6 text-right">
+                <h6>{{cart.order.shipmentTotal}}</h6>
+              </div>
+            </div>
+          {{/if}}
+
+          {{#if cart.order.includedTaxTotal}}
+            <div class="row">
+              <div class="col-sm-6">
+                <h6>Tax:</h6>
+              </div>
+              <div class="col-sm-6 text-right">
+                <h6>{{cart.order.includedTaxTotal}}</h6>
+              </div>
+            </div>
+          {{/if}}
+
+          <div class="row">
+            <div class="col-sm-6">
+              <h6>Order Total:</h6>
+            </div>
+            <div class="col-sm-6 text-right">
+              <h6>{{cart.order.total}}</h6>
+            </div>
+          </div>
+
+        </fieldset>
+      </form>
+      {{#link-to 'products'}}
+        <button>Keep Shopping</button>
+      {{/link-to}}
+      <button {{action 'transitionToCheckout'}}>Checkout</button>
+    {{else}}
+      <h1>Your cart is empty.</h1>
+      {{#link-to 'products'}}
+        <button>Keep Shopping</button>
+      {{/link-to}}
+    {{/if}}
+  </div>
+</div>

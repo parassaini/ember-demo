@@ -1,0 +1,16 @@
+<div class='col-sm-5 col-sm-offset-1 border1'>
+  <div class='row'>
+    {{variant.name}} : {{variant.price}}
+  </div>
+  <div class='row'>
+    <ul class='bxslider'>
+    {{#each variant.images as |image|}}
+      <li><img src={{image.largeUrl}}></li>
+    {{/each}}
+    </ul>
+  </div>
+  <div class='row'>
+    {{variant.optionsText}}
+  </div>
+  {{add-variant variant=variant}}
+</div>

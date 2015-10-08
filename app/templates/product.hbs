@@ -1,0 +1,15 @@
+<div class='row'>
+  {{#product-detail product=model}}
+    {{model.description}}
+  {{/product-detail}}
+  <div class='col-sm-9'>
+    <div class='row'>
+      <h3>Variants Available</h3>
+    </div>
+    <div class='row'>
+      {{#each model.variants as |variant|}}
+        {{ variant-detail variant=variant}}
+      {{/each}}
+    </div>
+  </div>
+</div>

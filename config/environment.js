@@ -3,6 +3,10 @@
 module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'front',
+    contentSecurityPolicy: {
+      'style-src': "'self' 'unsafe-inline'",
+      'connect-src': "*"
+    },
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
@@ -38,10 +42,24 @@ module.exports = function(environment) {
 
     ENV.APP.rootElement = '#ember-testing';
   }
-
   if (environment === 'production') {
 
   }
+  ENV['ember-simple-auth'] = {
+    store: 'session-store:local-storage',
+    base: {
+      routeAfterAuthentication: '/',
+      routeIfAlreadyAuthenticated: '/',
+      authenticationRoute: 'login'
+    }
+  }
+  ENV.torii = {
+    providers: {
+      'facebook-oauth2': {
+        apiKey: '1478909235771089'
+      }
+    }
+  };
 
   return ENV;
 };

@@ -1,0 +1,8 @@
+<form {{action "addToCart" on="submit"}}>
+  {{input name='variant' value=variant.id type='hidden'}}
+  <label for="quantity">Quantity</label>
+  {{input value=quantity type="number" placeholder="Enter Quantity"}}
+
+  <button type="submit">Add To Cart</button>
+</form>
+
